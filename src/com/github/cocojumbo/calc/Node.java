@@ -47,4 +47,12 @@ public class Node {
     public void calcResult() {
         this.value = operator.apply(lNode.value, rNode.value);
     }
+
+    public boolean isNumber() {
+        return value != null;
+    }
+
+    public boolean isOperator() {
+        return operator != null;
+    }
 }

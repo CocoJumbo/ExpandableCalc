@@ -5,7 +5,7 @@ import com.github.cocojumbo.calc.ParceTree;
 public class Main {
 
     public static void main(String[] args) {
-        new ParceTree().calculate("4123+331-3*7");
+        new ParceTree().calculate("4123+331*3");
         //new ParceTree().calculate("4123+331");
     }
 }

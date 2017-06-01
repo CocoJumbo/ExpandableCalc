@@ -21,18 +21,21 @@ public class Operators {
         return stringMap.get(symbol);
     }
 
-    private static class AppendOperator extends AbstractOperator {
-        private final int PRIORITY = 100;
+    private static class AppendOperator implements Operator {
+        protected final int  PRIORITY = 100;
         public Long apply(Long o1, Long o2) { return o1 + o2; }
+        public int getPriority() { return  PRIORITY; }
     }
 
-    private static class MinusOperator extends AbstractOperator {
+    private static class MinusOperator implements Operator {
         private final int PRIORITY = 100;
         public Long apply(Long o1, Long o2) { return o1 - o2; }
+        public int getPriority() { return  PRIORITY; }
     }
 
-    private static class MultiplicationOperator extends AbstractOperator {
-        private final int PRIORITY = 200;
+    private static class MultiplicationOperator implements Operator {
+        protected final int PRIORITY = 200;
         public Long apply(Long o1, Long o2) { return o1 * o2; }
+        public int getPriority() { return  PRIORITY; }
     }
 }

@@ -14,8 +14,10 @@ public class ParceTree {
     private Node findPriorityOperatorNode(Operator operator){
         Node iterator = head;
         while(iterator.operator.getPriority() < operator.getPriority()){
-            if(iterator.getrNode().operator != null){
+            if(iterator.getrNode().isOperator()){
                 iterator = iterator.getrNode();
+            } else {
+                break;
             }
         }
         return iterator;
@@ -23,8 +25,8 @@ public class ParceTree {
 
     public Long calculate(String expression) {
         Matcher mRequired = required.matcher(expression);
-
         while(mRequired.find()) {
+            System.out.println("step was executed 1");
             String group = mRequired.group();
             if(group.matches(Operators.RAWPATTERN)) {
                 Node operatorNode = new Node(Operators.getBySymbol(group));
@@ -35,6 +37,7 @@ public class ParceTree {
                 if(head == null) {
                     head = bufferedOperator;
                 }
+                System.out.println(head.operator.getPriority());
                 if(head.operator.getPriority() < operator.getPriority()){
                     Node priorityOperatorNode = findPriorityOperatorNode(operator);
                     operatorNode.setlNode(priorityOperatorNode.getrNode());
@@ -43,7 +46,7 @@ public class ParceTree {
 
             }
             if(group.matches(NUMERIC)) {
-                System.out.println(group);
+                //System.out.println(group);
                 Node value = new Node(Long.parseLong(group));
                 if(bufferedOperand == null) {
                     bufferedOperand = value;
@@ -59,6 +62,7 @@ public class ParceTree {
 
         }
 
+        System.out.println("step was executed");
         Node n = head;
         while((n = n.getrNode()) != null) {
             if(n.operator != null)
