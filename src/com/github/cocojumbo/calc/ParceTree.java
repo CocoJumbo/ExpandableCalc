@@ -23,7 +23,7 @@ public class ParceTree {
         return iterator;
     }
 
-    public Long calculate(String expression) {
+    public Long calculate(String expression) throws NullPointerException{
         Matcher mRequired = required.matcher(expression);
         while(mRequired.find()) {
             System.out.println("step was executed 1");
@@ -37,42 +37,33 @@ public class ParceTree {
                 if(head == null) {
                     head = bufferedOperator;
                 }
-                System.out.println(head.operator.getPriority());
                 if(head.operator.getPriority() < operator.getPriority()){
                     Node priorityOperatorNode = findPriorityOperatorNode(operator);
                     operatorNode.setlNode(priorityOperatorNode.getrNode());
                     priorityOperatorNode.setrNode(operatorNode);
+                    bufferedOperator = operatorNode;
+                }else{
+                    operatorNode.setlNode(head);
+                    head = operatorNode;
                 }
-
             }
             if(group.matches(NUMERIC)) {
-                //System.out.println(group);
                 Node value = new Node(Long.parseLong(group));
-                if(bufferedOperand == null) {
-                    bufferedOperand = value;
-                } else {
+
+                if(bufferedOperand != null){
                     bufferedOperator.setlNode(bufferedOperand);
+                    bufferedOperand = null;
+                }
+                if (head == null){
+                    bufferedOperand = value;
+                }
+
+                if(bufferedOperator != null && !bufferedOperator.hasRightNode()) {
                     bufferedOperator.setrNode(value);
-                    bufferedOperator = null;
-                    //System.out.println(head.operator);
-                    //System.out.println(head.lNode.value);
-                    //System.out.println(head.rNode.value);
+                    bufferedOperand = null;
                 }
             }
-
         }
-
-        System.out.println("step was executed");
-        Node n = head;
-        while((n = n.getrNode()) != null) {
-            if(n.operator != null)
-                System.out.println(n.operator);
-            if(n.getrNode() != null)
-                System.out.println(n.getlNode().value);
-            if(n.getlNode() != null)
-                System.out.println(n.getrNode().value);
-        }
-
         return null;
     }
 }

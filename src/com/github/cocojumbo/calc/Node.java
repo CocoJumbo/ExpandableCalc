@@ -44,6 +44,8 @@ public class Node {
         return parentNode;
     }
 
+    public boolean hasRightNode(){ return rNode != null; }
+
     public void calcResult() {
         this.value = operator.apply(lNode.value, rNode.value);
     }
