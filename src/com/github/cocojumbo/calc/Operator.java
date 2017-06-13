@@ -1,6 +1,8 @@
 package com.github.cocojumbo.calc;
 
+import java.math.BigDecimal;
+
 public interface Operator {
-    Long apply(Long o1, Long o2);
+    BigDecimal apply(BigDecimal o1, BigDecimal o2);
     int getPriority();
 }

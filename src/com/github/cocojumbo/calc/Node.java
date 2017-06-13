@@ -1,13 +1,14 @@
 package com.github.cocojumbo.calc;
+import java.math.BigDecimal;
 
 public class Node {
-    public Long     value       = null;
+    public BigDecimal value       = null;
     public Operator operator    = null;
     private Node    rNode       = null;
     private Node    lNode       = null;
     private Node    parentNode  = null;
 
-    public Node(Long value) {
+    public Node(BigDecimal value) {
         this.value = value;
     }
 
