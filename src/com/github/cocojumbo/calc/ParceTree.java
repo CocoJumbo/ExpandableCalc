@@ -29,16 +29,24 @@ public class ParceTree {
         while(mRequired.find()) {
             String group = mRequired.group();
             if(group.matches(Operations.RAWPATTERN)) {
-                Node operatorNode = new Node(Operations.getBySymbol(group));
-
-                if(bufferedOperator == null) {
-                    bufferedOperator = operatorNode;
-                }
+                bufferedOperator = new Node(Operations.getBySymbol(group));
                 if(head == null) {
                     head = bufferedOperator;
-                }/* else {
-
-                }*/
+                } else {
+                    Node targetNode = findPriorityPositionNode(bufferedOperator.operator);
+                    if(targetNode.isOperator()){
+                        if(targetNode == head){
+                            head = bufferedOperator;
+                            head.setlNode(targetNode);
+                        } else {
+                            targetNode.setlNode(bufferedOperator);
+                        }
+                    }
+                    if(targetNode.isOperand()){
+                        targetNode.getParentNode().setrNode(bufferedOperator);
+                        bufferedOperator.setlNode(targetNode);
+                    }
+                }
             }
             if(group.matches(NUMERIC)) {
                 Node value = new Node(new BigDecimal(group));
@@ -59,9 +67,9 @@ public class ParceTree {
     }
 
     private void clear(){
-        head = null;
         bufferedOperand  = null;
         bufferedOperator = null;
+        head = null;
     }
 
     public Node getHead(){

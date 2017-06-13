@@ -51,7 +51,7 @@ public class Node {
         this.value = operator.apply(lNode.value, rNode.value);
     }
 
-    public boolean isNumber() {
+    public boolean isOperand() {
         return value != null;
     }
 

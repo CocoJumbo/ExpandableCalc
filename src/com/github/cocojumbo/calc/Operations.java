@@ -7,9 +7,9 @@ import java.util.HashMap;
 
 public class Operations {
 
-    public static final String RAWPATTERN           = "\\+|-|\\*|^";
+    public static final String RAWPATTERN           = "\\+|-|\\*|\\^";
     public static final Operator APPEND             = new AppendOperator();
-    public static final Operator MINUS              = new SubstractOperator();
+    public static final Operator SUBSTRACT          = new SubstractOperator();
     public static final Operator MULTIPLICATION     = new MultiplicationOperator();
     public static final Operator POW                = new PowOperator();
 
@@ -17,7 +17,7 @@ public class Operations {
 
     static {
         stringMap.put("+", Operations.APPEND);
-        stringMap.put("-", Operations.MINUS);
+        stringMap.put("-", Operations.SUBSTRACT);
         stringMap.put("*", Operations.MULTIPLICATION);
         stringMap.put("^", Operations.POW);
     }
